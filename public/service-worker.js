@@ -3,7 +3,7 @@ const FILES_TO_CACHE = [
   "/db.js",
   "/index.js",
   "/styles.css",
-  "/manifest.json",
+  "/manifest.webmanifest",
   "/icons/icon-192x192.png",
   "/icons/icon-512x512.png",
 ];
@@ -20,7 +20,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// The activate handler takes care of cleaning up old caches.
+
 self.addEventListener('activate', (event) => {
   const currentCaches = [PRECACHE, RUNTIME];
   event.waitUntil(
@@ -37,5 +37,32 @@ self.addEventListener('activate', (event) => {
         );
       })
       .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener("fetch", function (event) {
+  if (event.request.url.includes("/api/")) {
+    event.respondWith(
+      caches.open(RUNTIME).then(cache => {
+        return fetch(event.request)
+          .then(response => {
+            if (response.status === 200) {
+              cache.put(event.request.url, response.clone());
+            }
+            return response;
+          })
+          .catch(err => {
+            return cache.match(event.request);
+          });
+      }).catch(err => console.log(err))
+    );
+    return;
+  }
+  event.respondWith(
+    caches.open(PRECACHE).then(cache => {
+      return cache.match(event.request).then(response => {
+        return response || fetch(event.request);
+      });
+    })
   );
 });
