@@ -12,7 +12,7 @@ Link to Deployment: [Budget Tracker]()
 
 ## Fucntionality
 
-![Screenshot](publuc/icons/Screenshot.JPG)
+![Screenshot](public/icons/Screenshot.JPG)
 
 ## Bugs and Issues
 Found a bug? Review any [open issues][open-issues] or create a [new issues here][new-issue] so we can fix it for you!
