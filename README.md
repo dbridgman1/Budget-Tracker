@@ -2,13 +2,13 @@
 
 ## Description
 
-
+The user can add expenses and deposits to their budget with or without a connection. When entering transactions offline, the total will populate when brought back online.
 
 ## Developer 
  
 <br>
 
-Link to Deployment: [Budget Tracker]()
+Link to Deployment: [Budget Tracker](https://dry-inlet-95019.herokuapp.com/)
 
 ## Fucntionality
 
